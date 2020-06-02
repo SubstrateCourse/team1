@@ -48,10 +48,15 @@ impl system::Trait for Test {
 	type OnNewAccount = ();
 	type OnKilledAccount = ();
 }
+
+parameter_types! {
+	pub const MaxClaimLength: u32 = 6;
+}
 impl Trait for Test {
 	type Event = ();
+	type MaxClaimLength = MaxClaimLength;
 }
-pub type TemplateModule = Module<Test>;
+pub type PoeModule = Module<Test>;
 
 // This function basically just builds a genesis storage key/value store according to
 // our desired mockup.
