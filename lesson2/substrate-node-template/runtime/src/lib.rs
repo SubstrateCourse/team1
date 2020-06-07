@@ -43,6 +43,8 @@ pub use frame_support::{
 /// Importing a template pallet
 pub use template;
 
+pub use poe;
+
 /// An index to a block.
 pub type BlockNumber = u32;
 
@@ -257,6 +259,10 @@ impl template::Trait for Runtime {
 	type Event = Event;
 }
 
+impl poe::Trait for Runtime{
+	type Event = Event;
+}
+
 construct_runtime!(
 	pub enum Runtime where
 		Block = Block,
@@ -273,6 +279,7 @@ construct_runtime!(
 		Sudo: sudo::{Module, Call, Config<T>, Storage, Event<T>},
 		// Used for the module template in `./template.rs`
 		TemplateModule: template::{Module, Call, Storage, Event<T>},
+		PoeModule: poe::{Module, Call, Storage, Event<T>},
 	}
 );
 
