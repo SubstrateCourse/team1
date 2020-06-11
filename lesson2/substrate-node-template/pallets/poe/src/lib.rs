@@ -9,10 +9,12 @@
 /// For more guidance on Substrate FRAME, see the example pallet
 /// https://github.com/paritytech/substrate/blob/master/frame/example/src/lib.rs
 
-use frame_support::{decl_module, decl_storage, decl_event, decl_error, dispatch, ensure, StorageMap};
+use frame_support::{decl_module, decl_storage, decl_event, decl_error, dispatch, ensure, StorageMap, traits::{Get}};
 use frame_system::{self as system, ensure_signed};
 
 use sp_std::prelude::*;
+
+use sp_runtime::traits::StaticLookup;
 
 #[cfg(test)]
 mod mock;
@@ -26,6 +28,8 @@ pub trait Trait: system::Trait {
 
 	/// The overarching event type.
 	type Event: From<Event<Self>> + Into<<Self as system::Trait>::Event>;
+
+	type MaxClaimLength: Get<u32>;
 }
 
 // This pallet's storage items.
@@ -61,6 +65,10 @@ decl_error! {
 		NoSuchClaim,
 
 		NotProofOwner,
+
+		ClaimNotExist,
+
+		ProofTooLong,
 	}
 }
 
@@ -78,11 +86,13 @@ decl_module! {
 		fn deposit_event() = default;
 
 
-		#[weight = 10_000]
+		#[weight= 10_000]
 		pub fn create_claim(origin, proof: Vec<u8>) -> dispatch::DispatchResult {
 			let sender = ensure_signed(origin)?;
 
 			ensure!(!Proofs::<T>::contains_key(&proof), Error::<T>::ProofAlreadyClaimed);
+
+			ensure!(T::MaxClaimLength::get() >= proof.len() as u32, Error::<T>::ProofTooLong);
 
 			let current_block = <system::Module<T>>::block_number();
 
@@ -111,23 +121,24 @@ decl_module! {
 
 		}
 
-        #[weight = 0]
-        pub fn transfer_claim(origin, claim: Vec<u8>, dest: <T::Lookup as StaticLookup>::Source) -> dispatch::DispatchResult {
-            let sender = ensure_signed(origin)?;
 
+		#[weight= 0]
+		pub fn transfer_claim(origin, claim: Vec<u8>, dest: <T::Lookup as StaticLookup>::Source) -> dispatch::DispatchResult {
+			// validate origin
+		    let sender = ensure_signed(origin)?;
+			// validate claim
             ensure!(Proofs::<T>::contains_key(&claim), Error::<T>::ClaimNotExist);
-
+			// get
             let (owner, _block_number) = Proofs::<T>::get(&claim);
-
-            ensure!(owner == sender, Error::<T>::NotClaimOwner);
-
+			// validate claim, origin relationship
+            ensure!(owner == sender, Error::<T>::NotProofOwner);
+			// get destination account id
             let dest = T::Lookup::lookup(dest)?;
-
+			// override exisiting claim
+			// for a map, insert the same key, value will be overriden
             Proofs::<T>::insert(&claim, (dest, system::Module::<T>::block_number()));
 
-            Ok(())           
-
-	    }
-
+            Ok(())
+         }
 	}
 }
