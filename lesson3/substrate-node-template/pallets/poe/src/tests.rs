@@ -89,7 +89,7 @@ fn transfer_claim_failed_if_not_claim_owner() {
 }
 
 #[test]
-fn revoke_claim_failed_if_not_exist() {
+fn transfer_claim_failed_if_not_exist() {
     new_test_ext().execute_with(|| {
         let claim = vec![1,2];
         //let _ = PoeModule::create_claim(Origin::signed(1), claim.clone());

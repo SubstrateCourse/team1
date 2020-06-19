@@ -257,11 +257,11 @@ export default function PoeModule (props) {
     ? <Main {...props} /> : null);
 }
 ```
-** create claim ui
+create claim ui
 - ![create_claim_ui](./create_claim_ui.png)
-** revoke claim ui
+revoke claim ui
 - ![revoke_claim_ui](./revoke_claim_ui.png)
-** transfer claim ui
+transfer claim ui
 - ![transfer_claim_ui](./transfer_claim_ui_1.png)
 - ![transfer_claim_ui](./transfer_claim_ui_2.png)
 
@@ -270,3 +270,7 @@ export default function PoeModule (props) {
 * 用户A为自己的某个存证记录设置价格；
 * 用户B可以以一定的价格购买某个存证，当出价高于用户A设置的价格时，则以用户A设定的价格将费用从用户B转移到用户A，再将该存证进行转移。如果出价低于用户A的价格时，则不进行转移，返回错误。
 
+set price ui
+- ![set_price](./set_price_ui.png)
+claim bought ui
+- ![claim_bought](./claim_bought.png)
