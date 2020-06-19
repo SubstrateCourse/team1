@@ -46,7 +46,7 @@ fn create_claim_failure_too_long() {
     })
 }
 ```
-![create_calim_test](./create_claim_test.png)
+- ![create_calim_test](./create_claim_test.png)
 
 * 撤销存证的测试用例；
 ```
@@ -82,7 +82,7 @@ fn revoke_claim_failed_if_not_claim_owner() {
 }
 
 ```
-![revoke_claim](./revoke_claim.png)
+ - ![revoke_claim](./revoke_claim_test.png)
 * 转移存证的测试用例；
 ```
 
@@ -117,7 +117,7 @@ fn revoke_claim_failed_if_not_exist() {
     })
 }
 ```
-![transfer_claim](./transfer_claim_test.png)
+- ![transfer_claim](./transfer_claim_test.png)
 
 第二题：编写存证模块的UI，包括
 
@@ -257,11 +257,13 @@ export default function PoeModule (props) {
     ? <Main {...props} /> : null);
 }
 ```
-
-![create_claim_ui](./create_claim_ui.png)
-![revoke_claim_ui](./revoke_claim_ui.png)
-![transfer_claim_ui](./transfer_claim_ui_1.png)
-![transfer_claim_ui](./transfer_claim_ui_2.png)
+** create claim ui
+- ![create_claim_ui](./create_claim_ui.png)
+** revoke claim ui
+- ![revoke_claim_ui](./revoke_claim_ui.png)
+** transfer claim ui
+- ![transfer_claim_ui](./transfer_claim_ui_1.png)
+- ![transfer_claim_ui](./transfer_claim_ui_2.png)
 
 第三题（附加题）：实现购买存证的功能代码：
 
