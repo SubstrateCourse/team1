@@ -273,4 +273,4 @@ transfer claim ui
 set price ui
 - ![set_price](./set_price_ui.png)
 claim bought ui
-- ![claim_bought](./claim_bought.png)
+- ![claim_bought](./claim_bought_ui.png)
