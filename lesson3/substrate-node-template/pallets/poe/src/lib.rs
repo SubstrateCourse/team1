@@ -53,6 +53,7 @@ decl_event!(
 		// ClaimCreated(AccountId, Vec<u8>, Balance),
 		ClaimCreated(AccountId, Vec<u8>),
 		ClaimRevoked(AccountId, Vec<u8>),
+		ClaimTranfered(AccountId, Vec<u8>, AccountId),
 		//PriceSet(AccountId, Vec<u8>, Balance),
 	}
 );
@@ -146,7 +147,9 @@ decl_module! {
 
 			let dest = T::Lookup::lookup(dest)?;
 
-			Proofs::<T>::insert(&claim, (dest, system::Module::<T>::block_number()));
+			Proofs::<T>::insert(&claim, (&dest, system::Module::<T>::block_number()));
+
+			Self::deposit_event(RawEvent::ClaimTranfered(sender, claim, dest));
 
 			Ok(())
 		}

@@ -14,12 +14,15 @@ function Main (props) {
   const [digest, setDigest] = useState('');
   const [owner, setOwner] = useState('');
   const [blockNumber, setBlockNumber] = useState(0);
+  const [dest, setDest] = useState('');
   const [price, setPrice] = useState(0);
   
 
   useEffect(() => {
     let unsubscribe;
+    //debugger;
     api.query.poeModule.proofs(digest, (result) => {
+      console.log(JSON.stringify(result))
       setOwner(result[0].toString());
       setBlockNumber(result[1].toNumber());
     }).then(unsub => {
@@ -61,12 +64,22 @@ function Main (props) {
             onChange = {(e) => handleFileChosen(e.target.files[0])} 
           />
         </Form.Field>
-        <Form.Field>
+        {/* <Form.Field>
           <Input
             type = 'text'
             id = 'price'
             lable = 'set your price'
             onChange = {(e) => setPrice(e.value)}
+          />
+
+        </Form.Field> */}
+        <Form.Field>
+          <Input
+            type = 'text'
+            id = 'dest'
+            placeholder = 'destination account'
+            value = {dest}
+            onChange = {(e) => setDest(e.target.value)}
           />
 
         </Form.Field>
@@ -97,6 +110,18 @@ function Main (props) {
           />
           <TxButton
             accountPair = {accountPair}
+            label = 'Transfer Claim'
+            setStatus = {setStatus}
+            type='SIGNED-TX'
+            attrs={{
+              palletRpc: 'poeModule',
+              callable: 'transferClaim',
+              inputParams: [digest, dest],
+              paramFields: [true]
+            }}
+          />
+          {/* <TxButton
+            accountPair = {accountPair}
             label = 'Set price'
             setStatus = {setStatus}
             type='SIGNED-TX'
@@ -118,10 +143,11 @@ function Main (props) {
               inputParams: [digest],
               paramFields: [true]
             }}
-          />
+          /> */}
         </Form.Field>
           <div>{status}</div>
-          <div>Block Number is {blockNumber}, Owner is {owner}</div>
+        <div>Block Number is {blockNumber}, Owner is {dest}</div>
+
       </Form>
     </Grid.Column>
   );
