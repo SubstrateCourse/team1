@@ -7,6 +7,7 @@ use sp_runtime::{
     traits::{BlakeTwo256, IdentityLookup}, testing::Header, Perbill,
 };
 use frame_system as system;
+// use pallet_balances as balances;
 
 impl_outer_origin! {
 	pub enum Origin for Test {}
@@ -53,9 +54,26 @@ parameter_types! {
     pub const MaxClaimLength: u32 = 6;
 }
 
+parameter_types! {
+	pub const ExistentialDeposit: u64 = 1;
+}
+
+
+//impl pallet_balances::Trait for Test {
+//    type Balance = u64;
+//    type DustRemoval = ();
+//    type Event = ();
+//    type ExistentialDeposit = ExistentialDeposit;
+//    type AccountStore = ();
+//}
+
+//pub type System = frame_system::Module<Test>;
+// pub type Balances = pallet_balances::Module<Test>;
+
 impl Trait for Test {
 	type Event = ();
     type MaxClaimLength = MaxClaimLength;
+    //type Currency = Balances;
 }
 pub type PoeModule = Module<Test>;
 

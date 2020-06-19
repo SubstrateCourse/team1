@@ -12,6 +12,42 @@
 第一题：编写存证模块的单元测试代码，包括：
 
 * 创建存证的测试用例；
+```
+#[test]
+fn create_claim_works() {
+    // PoeModule::create_claim();
+    new_test_ext().execute_with(|| {
+        let claim = vec![1,2];
+        assert_ok!(PoeModule::create_claim(Origin::signed(1), claim.clone()));
+        assert_eq!(Proofs::<Test>::get(&claim), (1, system::Module::<Test>::block_number()));
+    })
+}
+
+#[test]
+fn create_claim_failure_when_exists() {
+    new_test_ext().execute_with(|| {
+        let claim = vec![1,2];
+        assert_ok!(PoeModule::create_claim(Origin::signed(1), claim.clone()));
+        assert_noop!(
+            PoeModule::create_claim(Origin::signed(1), claim.clone()),
+            Error::<Test>::ProofAlreadyExist
+        );
+    })
+}
+
+#[test]
+fn create_claim_failure_too_long() {
+    new_test_ext().execute_with(|| {
+        let claim = vec![1,2,5,6,5,5,5,6,4,3];
+        assert_noop!(
+            PoeModule::create_claim(Origin::signed(1), claim.clone()),
+            Error::<Test>::ProofTooLong
+        );
+    })
+}
+```
+![create_calim_test](./create_claim_test.png)
+
 * 撤销存证的测试用例；
 * 转移存证的测试用例；
 
