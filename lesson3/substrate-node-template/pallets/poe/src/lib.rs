@@ -4,7 +4,7 @@
 
 use frame_support::{
 	decl_module, decl_storage, decl_event, decl_error, dispatch, ensure,
-	traits::{Get},
+	traits::{Get, Currency, ExistenceRequirement},
 };
 use frame_system::{self as system, ensure_signed};
 use sp_std::prelude::*;
@@ -23,9 +23,15 @@ pub trait Trait: system::Trait {
 	/// The overarching event type.
 	type Event: From<Event<Self>> + Into<<Self as system::Trait>::Event>;
 
+	type Currency: Currency<Self::AccountId>;
+
 	// 附加题答案
 	type MaxClaimLength: Get<u32>;
 }
+
+type BalanceOf<T> = <<T as Trait>::Currency as Currency<<T as system::Trait>::AccountId>>::Balance;
+
+
 
 // This pallet's storage items.
 decl_storage! {
@@ -34,14 +40,22 @@ decl_storage! {
 	// ---------------------------------vvvvvvvvvvvvvv
 	trait Store for Module<T: Trait> as TemplateModule {
 		Proofs get(fn proofs): map hasher(blake2_128_concat) Vec<u8> => (T::AccountId, T::BlockNumber);
+		Prices get(fn prices): map hasher(blake2_128_concat) Vec<u8> => BalanceOf<T>;
 	}
 }
 
 // The pallet's events
 decl_event!(
-	pub enum Event<T> where AccountId = <T as system::Trait>::AccountId {
-		ClaimCreated(AccountId, Vec<u8>),
+	pub enum Event<T> where
+		AccountId = <T as system::Trait>::AccountId,
+		Balance = BalanceOf<T>,
+	{
+		ClaimCreated(AccountId, Vec<u8>, Balance),
+		//ClaimCreated(AccountId, Vec<u8>),
 		ClaimRevoked(AccountId, Vec<u8>),
+		ClaimTranfered(AccountId, Vec<u8>, AccountId),
+		PriceSet(AccountId, Vec<u8>, Balance),
+		ClaimBought(AccountId, Vec<u8>, Balance, Balance),
 	}
 );
 
@@ -52,6 +66,8 @@ decl_error! {
 		ClaimNotExist,
 		NotClaimOwner,
 		ProofTooLong,
+		PriceTooLow,
+		BuyOwnClaim,
 	}
 }
 
@@ -79,8 +95,12 @@ decl_module! {
 
 			Proofs::<T>::insert(&claim, (sender.clone(), system::Module::<T>::block_number()));
 
-			Self::deposit_event(RawEvent::ClaimCreated(sender, claim));
+			let price : BalanceOf<T> = 0.into();
 
+			Prices::<T>::insert(&claim, &price);
+
+			 Self::deposit_event(RawEvent::ClaimCreated(sender, claim, price));
+			// Self::deposit_event(RawEvent::ClaimCreated(sender, claim));
 			Ok(())
 		}
 
@@ -101,6 +121,21 @@ decl_module! {
 			Ok(())
 		}
 
+		#[weight = 0]
+		pub fn set_price(origin, claim: Vec<u8>, price: BalanceOf<T>) {
+			let sender = ensure_signed(origin)?;
+
+			ensure!(Proofs::<T>::contains_key(&claim), Error::<T>::ClaimNotExist);
+
+			let (owner, _) = Proofs::<T>::get(&claim);
+
+			ensure!(owner == sender, Error::<T>::NotClaimOwner);
+
+			Prices::<T>::insert(&claim, &price);
+
+			Self::deposit_event(RawEvent::PriceSet(sender, claim, price));
+		}
+
 		// 第二题答案
 		#[weight = 0]
 		pub fn transfer_claim(origin, claim: Vec<u8>, dest: <T::Lookup as StaticLookup>::Source) -> dispatch::DispatchResult {
@@ -114,9 +149,37 @@ decl_module! {
 
 			let dest = T::Lookup::lookup(dest)?;
 
-			Proofs::<T>::insert(&claim, (dest, system::Module::<T>::block_number()));
+			Proofs::<T>::insert(&claim, (&dest, system::Module::<T>::block_number()));
+
+			Self::deposit_event(RawEvent::ClaimTranfered(sender, claim, dest));
 
 			Ok(())
 		}
+
+		#[weight = 0]
+		pub fn buy_claim(origin, claim: Vec<u8>, in_price: BalanceOf<T>) -> dispatch::DispatchResult {
+			let sender = ensure_signed(origin)?;
+
+			ensure!(Proofs::<T>::contains_key(&claim), Error::<T>::ClaimNotExist);
+
+			let (owner, _) = Proofs::<T>::get(&claim);
+
+			ensure!(owner != sender, Error::<T>::BuyOwnClaim);
+
+			let price = Prices::<T>::get(&claim);
+
+			ensure!(in_price >= price, Error::<T>::PriceTooLow);
+
+			T::Currency::transfer(&sender, &owner, price, ExistenceRequirement::AllowDeath)?;
+
+			Self::deposit_event(RawEvent::ClaimBought(sender, claim, price, in_price));
+
+			Ok(())
+
+		}
 	}
+}
+
+impl<T: Trait> Module<T> {
+
 }

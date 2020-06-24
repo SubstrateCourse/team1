@@ -42,6 +42,7 @@ pub use frame_support::{
 
 /// Importing a template pallet
 pub use template;
+// use frame_support::traits::Currency;
 
 /// An index to a block.
 pub type BlockNumber = u32;
@@ -259,12 +260,13 @@ impl template::Trait for Runtime {
 
 // 附加题答案
 parameter_types! {
-	pub const MaxClaimLength: u32 = 6;
+	pub const MaxClaimLength: u32 = 256;
 }
 
 impl poe::Trait for Runtime {
 	type Event = Event;
-	
+
+	type Currency = balances::Module<Runtime>;
 	// 附加题答案
 	type MaxClaimLength = MaxClaimLength;
 }
