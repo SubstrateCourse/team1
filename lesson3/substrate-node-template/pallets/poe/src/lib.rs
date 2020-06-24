@@ -95,7 +95,7 @@ decl_module! {
 
 			Proofs::<T>::insert(&claim, (sender.clone(), system::Module::<T>::block_number()));
 
-			 let price : BalanceOf<T> = 0.into();
+			let price : BalanceOf<T> = 0.into();
 
 			Prices::<T>::insert(&claim, &price);
 

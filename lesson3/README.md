@@ -119,6 +119,9 @@ fn revoke_claim_failed_if_not_exist() {
 ```
 - ![transfer_claim](./transfer_claim_test.png)
 
+* 撤销存证的测试用例；
+* 转移存证的测试用例；
+
 第二题：编写存证模块的UI，包括
 
 * 创建存证的UI
@@ -264,6 +267,7 @@ revoke claim ui
 transfer claim ui
 - ![transfer_claim_ui](./transfer_claim_ui_1.png)
 - ![transfer_claim_ui](./transfer_claim_ui_2.png)
+
 
 第三题（附加题）：实现购买存证的功能代码：
 

@@ -7,7 +7,7 @@ use sp_runtime::{
     traits::{BlakeTwo256, IdentityLookup}, testing::Header, Perbill,
 };
 use frame_system as system;
-// use pallet_balances as balances;
+
 
 impl_outer_origin! {
 	pub enum Origin for Test {}
@@ -70,15 +70,18 @@ parameter_types! {
 //pub type System = frame_system::Module<Test>;
 // pub type Balances = pallet_balances::Module<Test>;
 
+
+parameter_types! {
+	pub const MaxClaimLength: u32 = 6;
+}
 impl Trait for Test {
 	type Event = ();
-    type MaxClaimLength = MaxClaimLength;
-    type Currency = Balances;
+	type MaxClaimLength = MaxClaimLength;
 }
 pub type PoeModule = Module<Test>;
 
 // This function basically just builds a genesis storage key/value store according to
 // our desired mockup.
 pub fn new_test_ext() -> sp_io::TestExternalities {
-    system::GenesisConfig::default().build_storage::<Test>().unwrap().into()
+	system::GenesisConfig::default().build_storage::<Test>().unwrap().into()
 }
