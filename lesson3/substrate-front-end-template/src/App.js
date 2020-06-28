@@ -17,7 +17,7 @@ import PoeModule from './PoeModule'
 import Transfer from './Transfer';
 import Upgrade from './Upgrade';
 
-function Main () {
+function Main() {
   const [accountAddress, setAccountAddress] = useState(null);
   const { apiState, keyring, keyringState } = useSubstrate();
   const accountPair =
@@ -79,7 +79,7 @@ function Main () {
   );
 }
 
-export default function App () {
+export default function App() {
   return (
     <SubstrateContextProvider>
       <Main />

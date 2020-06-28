@@ -37,6 +37,7 @@ You can also build the app in production mode,
 ```bash
 yarn build
 ```
+
 and open `build/index.html` in your favorite browser.
 
 ## Configuration
@@ -45,34 +46,34 @@ The template's configuration is stored in the `src/config` directory, with
 `common.json` being loaded first, then the environment-specific json file,
 and finally environment variables, with precedence.
 
-* `development.json` affects the development environment
-* `test.json` affects the test environment, triggered in `yarn test` command.
-* `production.json` affects the production environment, triggered in
-`yarn build` command.
+- `development.json` affects the development environment
+- `test.json` affects the test environment, triggered in `yarn test` command.
+- `production.json` affects the production environment, triggered in
+  `yarn build` command.
 
 Some environment variables are read and integrated in the template `config` object,
 including:
 
-* `REACT_APP_PROVIDER_SOCKET` overriding `config[PROVIDER_SOCKET]`
-* `REACT_APP_DEVELOPMENT_KEYRING` overriding `config[DEVELOPMENT_KEYRING]`
+- `REACT_APP_PROVIDER_SOCKET` overriding `config[PROVIDER_SOCKET]`
+- `REACT_APP_DEVELOPMENT_KEYRING` overriding `config[DEVELOPMENT_KEYRING]`
 
 More on [React environment variables](https://create-react-app.dev/docs/adding-custom-environment-variables).
 
 When writing and deploying your own front end, you should configure:
 
-* `CUSTOM_TYPES` in `src/config/common.json`. See
+- `CUSTOM_TYPES` in `src/config/common.json`. See
   [Extending types](https://polkadot.js.org/api/start/types.extend.html).
-* `PROVIDER_SOCKET` in `src/config/production.json` pointing to your own
+- `PROVIDER_SOCKET` in `src/config/production.json` pointing to your own
   deployed node.
-* `DEVELOPMENT_KEYRING` in `src/config/common.json` be set to `false`.
+- `DEVELOPMENT_KEYRING` in `src/config/common.json` be set to `false`.
   See [Keyring](https://polkadot.js.org/api/start/keyring.html).
 
 ### Specifying Connecting Node
 
 There are two ways to specify it:
 
-* With `PROVIDER_SOCKET` in `{common, development, production}.json`.
-* With `rpc=<ws or wss connection>` query paramter after the URL. This overrides the above setting.
+- With `PROVIDER_SOCKET` in `{common, development, production}.json`.
+- With `rpc=<ws or wss connection>` query paramter after the URL. This overrides the above setting.
 
 ## Reusable Components
 
@@ -96,11 +97,10 @@ keyring and the blockchain itself. Specifically it exposes this API.
 - `types` - The custom types used in the connected node.
 - `keyring` - A keyring of accounts available to the user.
 - `keyringState` - One of `"READY"` or `"ERROR"` states. `keyring` is valid
-only when `keyringState === "READY"`.
+  only when `keyringState === "READY"`.
 - `api` - The remote api to the connected node.
 - `apiState` - One of `"CONNECTING"`, `"READY"`, or `"ERROR"` states. `api` is valid
-only when `apiState === "READY"`.
-
+  only when `apiState === "READY"`.
 
 ### TxButton Component
 
