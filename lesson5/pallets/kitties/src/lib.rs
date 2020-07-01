@@ -1,16 +1,27 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 
 use codec::{Encode, Decode};
-use frame_support::{decl_module, decl_storage, decl_error, ensure, StorageValue, StorageMap, traits::Randomness};
+use frame_support::{decl_module, decl_storage, decl_error, decl_event, ensure, StorageValue, StorageMap, traits::Randomness};
 use sp_io::hashing::blake2_128;
-use frame_system::ensure_signed;
+use frame_system::{self as system, ensure_signed};
 use sp_runtime::{DispatchError, DispatchResult};
 
 #[derive(Encode, Decode)]
 pub struct Kitty(pub [u8; 16]);
 
-pub trait Trait: frame_system::Trait {
+pub trait Trait: system::Trait {
+	type Event: From<Event<Self>> + Into<<Self as system::Trait>::Event>;
+
 }
+
+decl_event!(
+	pub enum Event<T> where
+		AccountId = <T as system::Trait>::AccountId
+	{
+		KittiesCreated(AccountId, u32),
+		KittiesBred(AccountId, u32),
+	}
+);
 
 decl_storage! {
 	trait Store for Module<T: Trait> as Kitties {
@@ -38,6 +49,8 @@ decl_module! {
 	pub struct Module<T: Trait> for enum Call where origin: T::Origin {
 		type Error = Error<T>;
 
+		fn deposit_event() = default;
+
 		/// Create a new kitty
 		#[weight = 0]
 		pub fn create(origin) {
@@ -51,6 +64,9 @@ decl_module! {
 			let kitty = Kitty(dna);
 
 			// 作业：补完剩下的部分
+			Self::insert_kitty(sender.clone(), kitty_id, kitty);
+
+			Self::deposit_event(RawEvent::KittiesCreated(sender, kitty_id));
 		}
 
 		/// Breed kitties
@@ -58,7 +74,9 @@ decl_module! {
 		pub fn breed(origin, kitty_id_1: u32, kitty_id_2: u32) {
 			let sender = ensure_signed(origin)?;
 
-			Self::do_breed(sender, kitty_id_1, kitty_id_2)?;
+			let id = Self::do_breed(sender.clone(), kitty_id_1, kitty_id_2)?;
+
+			Self::deposit_event(RawEvent::KittiesBred(sender, id));
 		}
 	}
 }
@@ -70,6 +88,12 @@ fn combine_dna(dna1: u8, dna2: u8, selector: u8) -> u8 {
 impl<T: Trait> Module<T> {
 	fn random_value(sender: &T::AccountId) -> [u8; 16] {
 		// 作业：完成方法
+		let payload= (
+			<pallet_randomness_collective_flip::Module<T> as Randomness<T::Hash>>::random_seed(),
+			sender,
+			<frame_system::Module<T>>::extrinsic_index()
+			);
+		return payload.using_encoded(blake2_128);
 	}
 
 	fn next_kitty_id() -> sp_std::result::Result<u32, DispatchError> {
@@ -82,9 +106,15 @@ impl<T: Trait> Module<T> {
 
 	fn insert_kitty(owner: T::AccountId, kitty_id: u32, kitty: Kitty) {
 		// 作业：完成方法
+		Kitties::insert(kitty_id, kitty);
+		KittiesCount::put(&kitty_id + 1);
+
+		let user_kitties_id = Self::owned_kitties_count(&owner);
+		OwnedKitties::<T>::insert((owner.clone(),user_kitties_id), &kitty_id);
+		OwnedKittiesCount::<T>::insert(owner.clone(), user_kitties_id + 1);
 	}
 
-	fn do_breed(sender: T::AccountId, kitty_id_1: u32, kitty_id_2: u32) -> DispatchResult {
+	fn do_breed(sender: T::AccountId, kitty_id_1: u32, kitty_id_2: u32) -> sp_std::result::Result<u32, DispatchError> {
 		let kitty1 = Self::kitties(kitty_id_1).ok_or(Error::<T>::InvalidKittyId)?;
 		let kitty2 = Self::kitties(kitty_id_2).ok_or(Error::<T>::InvalidKittyId)?;
 
@@ -106,6 +136,6 @@ impl<T: Trait> Module<T> {
 
 		Self::insert_kitty(sender, kitty_id, Kitty(new_dna));
 
-		Ok(())
+		Ok(kitty_id)
 	}
 }
