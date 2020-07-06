@@ -258,6 +258,7 @@ impl template::Trait for Runtime {
 }
 
 impl pallet_kitties::Trait for Runtime {
+	type Event = Event;
 }
 
 construct_runtime!(
@@ -277,7 +278,7 @@ construct_runtime!(
 		// Used for the module template in `./template.rs`
 		TemplateModule: template::{Module, Call, Storage, Event<T>},
 		// Substrate Kitties module
-		Kitties: pallet_kitties::{Module, Storage, Call},
+		Kitties: pallet_kitties::{Module, Storage, Call, Event<T>},
 	}
 );
 
