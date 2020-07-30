@@ -1,0 +1,10 @@
+{
+  "jsonrpc":"2.0",
+  "id":1,
+  "method":"author_insertKey",
+  "params": [
+    "aura",
+    "text bubble owner rebuild damage today steel inflict mom book absent fiscal//rzexin//aura",
+    "0x9c3c7edccb0c653c6a867ed9b51cf8a21265a6099109f8bbc03517df65ad7c71"
+  ]
+}

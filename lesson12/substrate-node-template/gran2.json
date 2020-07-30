@@ -1,0 +1,10 @@
+{
+  "jsonrpc":"2.0",
+  "id":1,
+  "method":"author_insertKey",
+  "params": [
+    "gran",
+    "text bubble owner rebuild damage today steel inflict mom book absent fiscal//rzexin//grandpa",
+    "0x9d1811c2cc677a55b04eac77a4390b64a1760e93cfe5577500c89cc921372aec"
+  ]
+}

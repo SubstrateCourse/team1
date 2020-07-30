@@ -1,0 +1,170 @@
+   Compiling node-template-runtime v2.0.0-rc2 (/home/jason/Study/JasonStudySubstrate/YiKuaiSubstrateCourse/team1/lesson3/substrate-node-template/runtime)
+   Compiling pallet-poe v2.0.0-rc2 (/home/jason/Study/JasonStudySubstrate/YiKuaiSubstrateCourse/team1/lesson3/substrate-node-template/pallets/poe)
+error[E0412]: cannot find type `Price` in this scope
+  --> pallets/poe/src/lib.rs:54:47
+   |
+54 |         ClaimPriceCreated(AccountId, Vec<u8>, Price),
+   |                                               ^^^^^ not found in this scope
+
+error[E0412]: cannot find type `Price` in this scope
+  --> pallets/poe/src/lib.rs:55:52
+   |
+55 |         ClaimBought(AccountId, AccountId, Vec<u8>, Price, ExpectPrice),
+   |                                                    ^^^^^ not found in this scope
+
+error[E0412]: cannot find type `ExpectPrice` in this scope
+  --> pallets/poe/src/lib.rs:55:59
+   |
+55 |         ClaimBought(AccountId, AccountId, Vec<u8>, Price, ExpectPrice),
+   |                                                           ^^^^^^^^^^^ not found in this scope
+
+error[E0275]: overflow evaluating the requirement `for<'b> _::_parity_scale_codec::compact::CompactRef<'b, _>: _::_parity_scale_codec::Encode`
+  --> pallets/poe/src/lib.rs:47:1
+   |
+47 | / decl_event!(
+48 | |     pub enum Event<T>
+49 | |     where
+50 | |         AccountId = <T as system::Trait>::AccountId,
+...  |
+56 | |     }
+57 | | );
+   | |__^
+   |
+   = help: consider adding a `#![recursion_limit="256"]` attribute to your crate (`pallet_poe`)
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'b> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'b, _>`
+   = note: required because of the requirements on the impl of `for<'a> _::_parity_scale_codec::Encode` for `_::_parity_scale_codec::compact::CompactRef<'a, _>`
+   = note: required because of the requirements on the impl of `_::_parity_scale_codec::Encode` for `[type error]`
+   = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: aborting due to 4 previous errors
+
+Some errors have detailed explanations: E0275, E0412.
+For more information about an error, try `rustc --explain E0275`.
+error: could not compile `pallet-poe`.
+
+To learn more, run the command again with --verbose.
+warning: build failed, waiting for other jobs to finish...

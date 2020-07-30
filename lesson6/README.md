@@ -1,125 +1,69 @@
-# Substrate Node Template
+# 006-jsrzx-hw-lesson6
 
-A new FRAME-based Substrate node, ready for hacking.
+## 完成作业
 
-## Build
+### 作业点１
 
-Install Rust:
+![image-20200623231359509](imgs/image-20200623231359509.png)
 
-```bash
-curl https://sh.rustup.rs -sSf | sh
-```
+### 作业点２
 
-Initialize your Wasm Build environment:
+![image-20200623232620556](imgs/image-20200623232620556.png)
 
-```bash
-./scripts/init.sh
-```
+![image-20200623232750487](imgs/image-20200623232750487.png)
 
-Build Wasm and native code:
+### 作业点３
 
-```bash
-cargo build --release
-```
+![image-20200624111928690](imgs/image-20200624111928690.png)
 
-## Run
+![image-20200624112121376](imgs/image-20200624112121376.png)
 
-### Single Node Development Chain
+##　功能测试
 
-Purge any existing developer chain state:
+> 启动网络：
+>
+> ```bash
+> $ ./target/release/node-template purge-chain dev
+> Are you sure to remove "/home/jason/.local/share/node-template/chains/dev/db"? [y/N]: y
+> "/home/jason/.local/share/node-template/chains/dev/db" removed.
+> 
+> $ ./target/release/node-template  --dev
+> ```
 
-```bash
-./target/release/node-template purge-chain --dev
-```
+### （1）使用Alice账号创建5只小猫
 
-Start a development chain with:
+![image-20200624112447124](imgs/image-20200624112447124.png)
 
-```bash
-./target/release/node-template --dev
-```
+### （2）查看小猫总数
 
-Detailed logs may be shown by running the node with the following environment variables set: `RUST_LOG=debug RUST_BACKTRACE=1 cargo run -- --dev`.
+![image-20200624112602105](imgs/image-20200624112602105.png)
 
-### Multi-Node Local Testnet
+### （3）分别查看5只小猫链表关系
 
-If you want to see the multi-node consensus algorithm in action locally, then you can create a local testnet with two validator nodes for Alice and Bob, who are the initial authorities of the genesis chain that have been endowed with testnet units.
+![image-20200624112925320](imgs/image-20200624112925320.png)
 
-Optionally, give each node a name and expose them so they are listed on the Polkadot [telemetry site](https://telemetry.polkadot.io/#/Local%20Testnet).
+### （4）Alice转移给Bob一只不存在的小猫，将会报错
 
-You'll need two terminal windows open.
+![image-20200624113014514](imgs/image-20200624113014514.png)
 
-We'll start Alice's substrate node first on default TCP port 30333 with her chain database stored locally at `/tmp/alice`. The bootnode ID of her node is `QmRpheLN4JWdAnY7HGJfWFNbfkQCb6tFf4vvA6hgjMZKrR`, which is generated from the `--node-key` value that we specify below:
+### （5）Alice转移属于自己编号为3的小猫给Bob
 
-```bash
-cargo run -- \
-  --base-path /tmp/alice \
-  --chain=local \
-  --alice \
-  --node-key 0000000000000000000000000000000000000000000000000000000000000001 \
-  --telemetry-url 'ws://telemetry.polkadot.io:1024 0' \
-  --validator
-```
+![image-20200624113137852](imgs/image-20200624113137852.png)
 
-In the second terminal, we'll start Bob's substrate node on a different TCP port of 30334, and with his chain database stored locally at `/tmp/bob`. We'll specify a value for the `--bootnodes` option that will connect his node to Alice's bootnode ID on TCP port 30333:
+### （6）可见Alice编号已经查询不到编号为3的小猫，且链表索引已经做了重建
 
-```bash
-cargo run -- \
-  --base-path /tmp/bob \
-  --bootnodes /ip4/127.0.0.1/tcp/30333/p2p/QmRpheLN4JWdAnY7HGJfWFNbfkQCb6tFf4vvA6hgjMZKrR \
-  --chain=local \
-  --bob \
-  --port 30334 \
-  --telemetry-url 'ws://telemetry.polkadot.io:1024 0' \
-  --validator
-```
+![image-20200624113214802](imgs/image-20200624113214802.png)
 
-Additional CLI usage options are available and may be shown by running `cargo run -- --help`.
+### （7）使用kitties-ui转移编号为2的小猫给Bob
 
-### Run in Docker
+![image-20200624113750451](imgs/image-20200624113750451.png)
 
-First, install [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/).
+### （8）再此查看Alice拥有小猫的链表索引变化
 
-Then run the following command to start a single node development chain.
+![image-20200624114028141](imgs/image-20200624114028141.png)
 
-```bash
-./scripts/docker_run.sh
-```
+### （9）查看Bob拥有小猫的链表索引
 
-This command will firstly compile your code, and then start a local development network. You can also replace the default command (`cargo build --release && ./target/release/node-template --dev --ws-external`) by appending your own. A few useful ones are as follow.
+![image-20200624114416145](imgs/image-20200624114416145.png)
 
-```bash
-# Run Substrate node without re-compiling
-./scripts/docker_run.sh ./target/release/node-template --dev --ws-external
-
-# Purge the local dev chain
-./scripts/docker_run.sh ./target/release/node-template purge-chain --dev
-
-# Check whether the code is compilable
-./scripts/docker_run.sh cargo check
-```
-
-## Advanced: Generate Your Own Substrate Node Template
-
-A substrate node template is always based on a certain version of Substrate. You can inspect it by
-opening [Cargo.toml](Cargo.toml) and see the template referred to a specific Substrate commit(
-`rev` field), branch, or version.
-
-You can generate your own Substrate node-template based on a particular Substrate
-version/commit by running following commands:
-
-```bash
-# git clone from the main Substrate repo
-git clone https://github.com/paritytech/substrate.git
-cd substrate
-
-# Switch to a particular branch or commit of the Substrate repo your node-template based on
-git checkout <branch/tag/sha1>
-
-# Run the helper script to generate a node template.
-# This script compiles Substrate and takes a while to complete. It takes a relative file path
-#   from the current dir. to output the compressed node template.
-.maintain/node-template-release.sh ../node-template.tar.gz
-```
-
-Noted though you will likely get faster and more thorough support if you stick with the releases
-provided in this repository.
+### 符合预期，通过测试。

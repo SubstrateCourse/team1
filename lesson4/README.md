@@ -1,8 +1,8 @@
-## 第四课作业
+# 第四课作业
 
 这一题是建基于第三课的功课。
 
-#### 基本题 (5分)
+## 基本题 (5分)
 
 修改 Substrate Node template 及客户端 (看下面交付 2a 及 2b, 二选其一) 使可以支持 用户指定选择一个档案，然后在客户端算出它的 档案 hash 值，并接受用户输入一组不长于 256 字符串的备注  然后把这些资讯以一个 signed transaction 发到 Substrate 网络。
 
@@ -35,9 +35,17 @@
     cd client
     yarn install
     yarn submitDocInfo <your-file-path> <comment>
-    ``` 
+    ```
 
-#### 附加题(5分) - 本次附加题为必答题
+### 作业效果呈现
+
+![image-20200617222131742](imgs/image-20200617222131742.png)
+
+
+
+## 附加题(5分) 
+
+本次附加题为必答题
 
 下列 a) 或 b) 选一个作答
 
@@ -67,3 +75,14 @@ cd client
 yarn install
 yarn getUserDocs <user-account>
 ```
+
+### 作业效果呈现
+
+![image-20200617234148609](imgs/image-20200617234148609.png)
+
+## 参考
+
+https://github.com/fyang1024/team4/blob/lesson-4/lesson4/substrate-node-template/pallets/poe/src/lib.rs
+
+https://github.com/raindust/team5/blob/lesson-4/lesson4/substrate-node-template/pallets/poe/src/lib.rs
+
